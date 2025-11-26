@@ -226,6 +226,7 @@ final generated = await firebaseService.generateAIImages(
       setState(() => _uploadProgress = 1.0);
 
 if (generated.isNotEmpty) {
+  if (!mounted) return;  // ← ADD THIS LINE
   await firebaseService.saveGenerationResult(
     originalUrl: _uploadedImageUrl ?? '',
     generatedUrls: generated,
@@ -235,7 +236,7 @@ if (generated.isNotEmpty) {
   await Future.wait(
     generated.map((url) => precacheImage(NetworkImage(url), context))
   );
-  
+  if (!mounted) return;
   // Update state with results
   setState(() {
     _generatedImages = generated;
@@ -257,6 +258,7 @@ if (generated.isNotEmpty) {
       }
     } catch (e) {
       setState(() {
+        if (!mounted) return;
         _isGenerating = false;
         _uploadProgress = 0.0;
       });
@@ -281,9 +283,9 @@ if (generated.isNotEmpty) {
 
   @override
 Widget build(BuildContext context) {
-  return WillPopScope(
-    onWillPop: () async => !_isGenerating, // Prevent back button during generation
-    child: Scaffold(
+  return PopScope(
+  canPop: !_isGenerating, // Prevent back button during generation
+  child: Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -308,7 +310,7 @@ Widget build(BuildContext context) {
                         borderRadius: BorderRadius.circular(32),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 20,
                             offset: const Offset(0, 10),
                           ),
@@ -533,7 +535,7 @@ Widget build(BuildContext context) {
             height: 8,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFFA855F7).withOpacity(0.3 + (index * 0.2)),
+              color: Color(0xFFA855F7).withValues(alpha: 0.3 + (index * 0.2)),
             ),
           );
         }),
