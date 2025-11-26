@@ -130,7 +130,7 @@ Tech Stack:
 - State Management: Provider
 - Image Handling: image_picker, gal, dio
 
-## 📦 Key Dependencies
+Key Dependencies:
 
 ```yaml
 firebase_core: ^3.6.0          # Firebase initialization
@@ -144,7 +144,7 @@ gal: ^2.3.0                    # Save to gallery
 provider: ^6.1.1               # State management
 ```
 
-## 🏗️ Project Structure
+Project Structure:
 
 ```
 photo_ai_app/
@@ -167,7 +167,7 @@ photo_ai_app/
 └── pubspec.yaml                  # Dependencies
 ```
 
-## 🔧 Configuration
+Configuration:
 
 ### NanoBanana API
 
@@ -188,14 +188,14 @@ Located in `functions/index.js`:
   - Image-only (preset scenes)
   - Text + Image (custom scenes with your photo)
 
-## 🎨 Available Scenes
+Available Scenes:
 
 1. **Tropical Beach** - Sunset with palm trees and turquoise water
 2. **City Night** - Modern skyscrapers with bright lights
 3. **Mountain Peak** - Sunrise with dramatic clouds
 4. **Cozy Cafe** - Aesthetic cafe with warm lighting
 
-## 🐛 Troubleshooting
+Troubleshooting:
 
 ### Android Issues
 
@@ -237,24 +237,11 @@ flutter run
 - Image generation can take 2-5 minutes
 - Check Firebase Console → Functions → Logs for errors
 
-## 📄 License
 
-This project is licensed under the MIT License.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📧 Support
-
-If you have any questions or issues, please open an issue on GitHub.
-
-## 🙏 Acknowledgments
+## Thanks to:
 
 - [Flutter](https://flutter.dev/) - UI framework
 - [Firebase](https://firebase.google.com/) - Backend services
 - [NanoBanana API](https://nanobananaapi.ai/) - AI image generation
 
 ---
-
-Made with ❤️ using Flutter
