@@ -14,7 +14,7 @@ class ControlsSection extends StatelessWidget {
   final VoidCallback onGenerate;
 
   const ControlsSection({
-    Key? key,
+    super.key,
     required this.selectedImage,
     required this.promptController,
     required this.customPrompt,
@@ -24,7 +24,7 @@ class ControlsSection extends StatelessWidget {
     required this.onPromptChanged,
     required this.onSceneSelected,
     required this.onGenerate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

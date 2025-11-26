@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../utils/constants.dart';
 
 class AppHeader extends StatefulWidget {
-  const AppHeader({Key? key}) : super(key: key);
+  const AppHeader({super.key});
 
   @override
   State<AppHeader> createState() => _AppHeaderState();

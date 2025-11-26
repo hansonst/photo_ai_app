@@ -13,7 +13,7 @@ import '../widgets/controls_section.dart';
 import '../widgets/app_header.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -252,6 +252,7 @@ if (generated.isNotEmpty) {
 }
 
       if (generated.isEmpty) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Failed to generate images')),
         );
@@ -262,6 +263,7 @@ if (generated.isNotEmpty) {
         _isGenerating = false;
         _uploadProgress = 0.0;
       });
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );

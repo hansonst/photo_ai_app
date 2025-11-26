@@ -17,7 +17,6 @@ void main() async {
   // Sign in anonymously (no login screen needed)
   if (FirebaseAuth.instance.currentUser == null) {
     await FirebaseAuth.instance.signInAnonymously();
-    print('✅ User signed in anonymously');
   }
   
   runApp(const MyApp());
