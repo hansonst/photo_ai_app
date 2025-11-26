@@ -10,13 +10,13 @@ class ResultsSection extends StatefulWidget {
   final VoidCallback onUploadNew;
 
   const ResultsSection({
-    Key? key,
+    super.key,
     required this.selectedImage,
     required this.generatedImages,
     required this.onRegenerate,
     required this.onDownload,
     required this.onUploadNew,
-  }) : super(key: key);
+  });
 
   @override
   State<ResultsSection> createState() => _ResultsSectionState();
@@ -273,55 +273,43 @@ class _ResultsSectionState extends State<ResultsSection> {
             ),
             const SizedBox(width: 12),
             Expanded(
-  child: Builder(
-    builder: (context) {
-      print('🔍 Building download button - isDownloading: $_isDownloading');
-      return ElevatedButton.icon(
-        onPressed: _isDownloading ? null : () {
-          print('✅ Download button PRESSED');
+  child: ElevatedButton.icon(
+    onPressed: _isDownloading ? null : () {
+      setState(() {
+        _isDownloading = true;
+      });
+      
+      widget.onDownload();
+      
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
           setState(() {
-            _isDownloading = true;
-            print('⏳ Set _isDownloading = true');
+            _isDownloading = false;
           });
-          
-          widget.onDownload();
-          print('📥 Called widget.onDownload()');
-          
-          Future.delayed(const Duration(seconds: 3), () {
-            if (mounted) {
-              print('⏰ 3 seconds passed, resetting state');
-              setState(() {
-                _isDownloading = false;
-                print('✅ Set _isDownloading = false');
-              });
-            } else {
-              print('❌ Widget not mounted, cannot reset state');
-            }
-          });
-        },
-        icon: _isDownloading 
-            ? SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
-              )
-            : const Icon(Icons.download),
-        label: Text(_isDownloading ? 'Downloading...' : 'Download'),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.6),
-          disabledForegroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          elevation: 0,
-        ),
-      );
+        }
+      });
     },
+    icon: _isDownloading 
+        ? const SizedBox(
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          )
+        : const Icon(Icons.download),
+    label: Text(_isDownloading ? 'Downloading...' : 'Download'),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColors.primary,
+      foregroundColor: Colors.white,
+      disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.6),
+      disabledForegroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)),
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      elevation: 0,
+    ),
   ),
 ),
           ],
@@ -351,11 +339,11 @@ class ImageZoomViewer extends StatefulWidget {
   final String generatedImageUrl;
 
   const ImageZoomViewer({
-    Key? key,
+    super.key,
     required this.isOriginal,
     required this.originalImage,
     required this.generatedImageUrl,
-  }) : super(key: key);
+  });
 
   @override
   State<ImageZoomViewer> createState() => _ImageZoomViewerState();
